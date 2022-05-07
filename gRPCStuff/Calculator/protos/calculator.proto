@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+// setting language namespace
+option csharp_namespace = "GrpcCalculator";
+
+// Unit enum typedef
+enum Unit {
+    DEGREES = 0;
+    RADIANS = 1;
+}
+
+// Client TrigRequest message def
+message TrigRequest {
+    double value = 1; // request value is of type double
+    Unit unit = 2;    // request unit is of enum Unit type
+}
+
+// Server MathResponse message def
+message MathResponse {
+    double answer = 1; // response answer is of type double
+}
+
+// Calculator service definition
+service CalculatorService {
+    // the 3 functions take a TrigRequest object and return a MathResponse object
+    rpc sine(TrigRequest) returns (MathResponse);
+    rpc cosine(TrigRequest) returns (MathResponse);
+    rpc tan(TrigRequest) returns (MathResponse);
+}
